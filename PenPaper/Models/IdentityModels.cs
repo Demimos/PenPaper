@@ -29,5 +29,9 @@ namespace PenPaper.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<PenPaper.Models.Charsheet> Charsheets { get; set; }
+
+        public System.Data.Entity.DbSet<PenPaper.Models.Game> Games { get; set; }
     }
 }
