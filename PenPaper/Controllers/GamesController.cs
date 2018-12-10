@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Mvc;
 using PenPaper.Models;
 
 namespace PenPaper.Controllers
@@ -17,9 +18,14 @@ namespace PenPaper.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Games
-        public IQueryable<Game> GetGames()
+        public async System.Threading.Tasks.Task<ActionResult> GetGamesAsync(string Usr)
         {
-            return db.Games;
+            ApplicationUser user = await db.Users.FirstOrDefaultAsync(p => p.Id == Usr);
+            if (User == null)
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            List<Game> games = await db.Games.Include(p => p.Charsheets).
+                Where(p => p.ApplicationUserId == Usr || p.Charsheets.Where(o => o.ApplicationUserId == Usr).ToList() != null).ToListAsync();
+            return new JsonResult();
         }
 
         // GET: api/Games/5

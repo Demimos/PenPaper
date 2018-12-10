@@ -8,7 +8,7 @@
         public int Version { get; set; }
         public int? GameId { get; set; }
         public virtual Game Game { get; set; }
-        public int ApplicationUserId { get; set; }
+        public string ApplicationUserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

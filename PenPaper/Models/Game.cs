@@ -14,7 +14,7 @@ namespace PenPaper.Models
         public string Descriptio { get; set; }
         public ICollection<Charsheet> Charsheets { get; set; }
         public int Version { get; set; }
-        public int ApplicationUserId { get; set; }
+        public string ApplicationUserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }
